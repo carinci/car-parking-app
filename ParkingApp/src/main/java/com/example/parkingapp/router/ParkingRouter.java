@@ -21,69 +21,42 @@ public class ParkingRouter {
         this.parkingService = parkingService;
     }
 
-    @PostMapping("/report-problem")
-    public String reportProblem(@RequestParam Long spotId, @RequestParam String problem, RedirectAttributes redirectAttrs) {
-        parkingService.reportProblem(spotId, problem);
-        redirectAttrs.addFlashAttribute("message", "Problem reported for spot " + spotId);
-        return "redirect:/dashboard";
+    @GetMapping("/parking")
+    public String showParking(Model model) {
+        List<ParkingSpot> parkingSpots = parkingService.getAllSpots();
+        model.addAttribute("parkingSpots", parkingSpots);
+        return "parking";
     }
 
-    @GetMapping("/bookSpot/{id}")
-    public String bookSpot(@PathVariable("id") Long spotId, Model model) {
-        ParkingSpot bookedSpot = parkingService.bookSpot(spotId);
-        model.addAttribute("bookedSpot", bookedSpot);
-        return "bookingConfirmation"; // Confirm booking view
+    @GetMapping("/parking/{id}")
+    public String showParkingSpot(@PathVariable Long id, Model model) {
+        ParkingSpot spot = parkingService.getSpot(id);
+        model.addAttribute("spot", spot);
+        return "parkingSpot";
     }
 
-    @GetMapping("/cancelBooking/{id}")
-    public String cancelBooking(@PathVariable("id") Long bookingId, Model model) {
-        parkingService.cancelBooking(bookingId);
-        return "redirect:/parking";
+    @GetMapping("/parking/{id}/book")
+    public String showBookingForm(@PathVariable Long id, Model model) {
+        ParkingSpot spot = parkingService.getSpot(id);
+        model.addAttribute("spot", spot);
+        model.addAttribute("booking", new Booking());
+        return "bookingForm";
     }
 
-    // Assuming getBookingHistory is a valid method in ParkingService
-    @GetMapping("/booking-history")
-    public String showBookingHistory(Model model) {
-        List<Booking> bookingHistory = parkingService.getBookingHistory();
-        model.addAttribute("bookingHistory", bookingHistory);
-        return "bookingHistory"; // the name of your Thymeleaf template
+    @PostMapping("/parking/{id}/book")
+    public String submitBooking(@PathVariable Long id, @ModelAttribute Booking booking, RedirectAttributes redirectAttributes) {
+        ParkingSpot spot = parkingService.getSpot(id);
+        booking.setParkingSpot(spot);
+        redirectAttributes.addFlashAttribute("booking", booking);
+        return "redirect:/parking/{id}/book/confirm";
+    }
+
+    @GetMapping("/parking/{id}/book/confirm")
+    public String showBookingConfirmation(@PathVariable Long id, Model model) {
+        ParkingSpot spot = parkingService.getSpot(id);
+        model.addAttribute("spot", spot);
+        return "bookingConfirmation";
     }
 
 
-
-
-
-    @GetMapping("/reportProblem/{id}")
-    public String reportProblemForm(@PathVariable("id") Long spotId, Model model) {
-        model.addAttribute("spotId", spotId);
-        return "reportProblem"; // Form to report a problem
     }
-
-    @PostMapping("/reportProblem")
-    public String submitReportProblem(@RequestParam String problemDescription, @RequestParam Long spotId) {
-        parkingService.reportProblem(spotId, problemDescription);
-        return "redirect:/parking";
-    }
-
-    // Assume saveFavoriteSpot is a valid method in ParkingService
-    @GetMapping("/saveFavorite/{id}")
-    public String saveFavoriteSpot(@PathVariable("id") Long userId, @PathVariable("id") Long spotId) {
-        parkingService.saveFavoriteSpot(userId, spotId);
-        return "redirect:/favorites"; // Redirect to a page showing favorites
-    }
-
-    // Assume shareParkingLocation is a valid method in ParkingService
-    @GetMapping("/shareLocation/{id}")
-    public String shareParkingLocation(@PathVariable("id") Long spotId, Model model) {
-        String shareableLink = parkingService.shareParkingLocation(spotId);
-        model.addAttribute("shareLink", shareableLink);
-        return "shareLocation"; // View for sharing location
-    }
-
-    // Assume submitFeedback is a valid method in ParkingService
-    @PostMapping("/feedback")
-    public String submitFeedback(@RequestParam String feedback, @RequestParam Long spotId) {
-        parkingService.submitFeedback(spotId, feedback);
-        return "redirect:/feedbackReceived"; // Redirect after submitting feedback
-    }
-}

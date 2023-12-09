@@ -20,4 +20,8 @@ public class Booking {
     private LocalDateTime endTime;
 
 
+    public void setParkingSpot(ParkingSpot spot) {
+        this.spot = spot;
+
+    }
 }
