@@ -17,4 +17,17 @@ public class SupportService {
     public void createSupportRequest(SupportRequest request) {
         // Logic to save the support request
     }
+
+    public boolean contactSupport(SupportRequest request) {
+        // Logic to handle a support request
+        return true; // Return true if request is successfully handled
+    }
+
+    public boolean reportProblem(ProblemReport report) {
+        // Logic to handle problem reporting
+        return true; // Return true if problem is successfully reported
+    }
+
+
+
 }

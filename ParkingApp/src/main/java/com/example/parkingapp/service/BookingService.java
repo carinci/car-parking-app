@@ -53,6 +53,19 @@ public class BookingService {
         return bookingMap.containsKey(id);
     }
 
+    public Booking bookParkingSpot(Long userId, Long parkingSpotId) {
+        // Logic to book a parking spot
+        // Create a new Booking object and add it to a booking map or list
+        return new Booking(); // Return the booking object
+    }
+
+    public boolean cancelBooking(Long bookingId) {
+        // Logic to cancel a booking
+        // Remove the booking from the booking map or list
+        return true; // Return true if successful
+    }
+
+
     // retrieve all bookings
     public List<Booking> getAllBookings() {
         return bookingMap.values().stream().toList();

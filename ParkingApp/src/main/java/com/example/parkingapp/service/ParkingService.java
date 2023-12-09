@@ -45,4 +45,20 @@ public class ParkingService {
         return new ArrayList<>(parkingSpots.values());
     }
 
+    public ParkingSpot getParkingSpotDetails(Long parkingSpotId) {
+        return parkingSpots.get(parkingSpotId);
     }
+
+    public boolean markAsFavorite(Long userId, Long parkingSpotId) {
+        ParkingSpot spot = parkingSpots.get(parkingSpotId);
+        if (spot != null) {
+            // Logic to mark the spot as favorite for the user
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+}
