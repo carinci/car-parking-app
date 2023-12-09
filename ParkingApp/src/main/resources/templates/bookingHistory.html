@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking History</title>
+</head>
+<body>
+<h1>Your Booking History</h1>
+<div th:if="${bookingHistory.empty}">
+  <p>No bookings found.</p>
+</div>
+<div th:unless="${bookingHistory.empty}">
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Parking Spot ID</th>
+      <th>User ID</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="booking : ${bookingHistory}">
+      <td th:text="${booking.id}"></td>
+      <td th:text="${booking.parkingSpotId}"></td>
+      <td th:text="${booking.userId}"></td>
+      <td th:text="${booking.startTime}"></td>
+      <td th:text="${booking.endTime}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

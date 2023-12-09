@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking Spots</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Available Parking Spots</h1>
+<div th:if="${spots.empty}">
+    <p>No available parking spots at the moment.</p>
+</div>
+<div th:unless="${spots.empty}">
+    <table>
+        <thead>
+        <tr>
+            <th>Spot ID</th>
+            <th>Location</th>
+            <th>Book</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="spot : ${spots}">
+            <td th:text="${spot.id}">Spot ID</td>
+            <td th:text="${spot.location}">Location</td>
+            <td><a th:href="@{/bookSpot/{id}(id=${spot.id})}">Book Now</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

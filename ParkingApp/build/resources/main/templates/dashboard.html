@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Welcome to Your Dashboard</h1>
+<nav>
+    <ul>
+        <li><a th:href="@{/profile}">Profile</a></li>
+        <li><a th:href="@{/bookingHistory}">Booking History</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
+</body>
+</html>
