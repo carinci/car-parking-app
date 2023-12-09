@@ -41,10 +41,9 @@ public class ParkingController {
         // Update any fields should they be set (per patch rules)
 
         if (spot.getSpotNumber() != null) currentSpot.setSpotNumber(spot.getSpotNumber());
-        if (spot.getSpotType() != null) currentSpot.setSpotType(spot.getSpotType());
-        if (spot.getSpotLocation() != null) currentSpot.setSpotLocation(spot.getSpotLocation());
-        if (spot.getSpotStatus() != null) currentSpot.setSpotStatus(spot.getSpotStatus());
-        if (spot.getSpotPrice() != null) currentSpot.setSpotPrice(spot.getSpotPrice());
+        if (spot.getLocation() != null) currentSpot.setLocation(spot.getLocation());
+        if (spot.getStatus() == false) currentSpot.setStatus(true);
+        if (spot.getPrice() != null) currentSpot.setSpotPrice(spot.getSpotPrice());
         if (spot.getSpotDescription() != null) currentSpot.setSpotDescription(spot.getSpotDescription());
         if (spot.getSpotImage() != null) currentSpot.setSpotImage(spot.getSpotImage());
 

@@ -16,7 +16,7 @@ public class ParkingService {
 
     public ParkingSpot addSpot(ParkingSpot spot) {
         parkingSpotIncrement++;
-        spot.setId(parkingSpotIncrement);
+        spot.setId((long) parkingSpotIncrement);
         parkingSpots.put(spot.getId(), spot);
         return spot;
     }

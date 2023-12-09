@@ -22,7 +22,7 @@ public class UserService {
     // insert booking into map
     public User addUser(User booking) {
         userIncrement++;
-        booking.setId(userIncrement);
+        booking.setId((long) userIncrement);
         userMap.put(booking.getId(), booking);
         return booking;
     }
