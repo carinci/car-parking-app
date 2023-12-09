@@ -18,7 +18,7 @@ public class ParkingService {
 
     public ParkingSpot addSpot(ParkingSpot spot) {
         parkingSpotIncrement++;
-        spot.setId((long) parkingSpotIncrement);
+        spot.setId(parkingSpotIncrement);
         parkingSpots.put(spot.getId(), spot);
         return spot;
     }
@@ -47,9 +47,6 @@ public class ParkingService {
         return new ArrayList<>(parkingSpots.values());
     }
 
-<<<<<<< HEAD
-    }
-=======
     public ParkingSpot getParkingSpotDetails(Long parkingSpotId) {
         return parkingSpots.get(parkingSpotId);
     }
@@ -81,4 +78,3 @@ public class ParkingService {
 
 
 }
->>>>>>> kristian
