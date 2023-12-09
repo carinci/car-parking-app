@@ -57,4 +57,26 @@ public class UserService {
     public List<User> getAllUsers() {
         return userMap.values().stream().toList();
     }
+
+    public User updateUserAccount(Long userId, User updatedUser) {
+        User user = userMap.get(userId);
+        if (user != null) {
+            user.setEmail(updatedUser.getEmail());
+            // Add other fields to update as needed
+            userMap.put(userId, user);
+        }
+        return user;
+    }
+
+
+    public boolean resetPassword(Long userId, String newPassword) {
+        User user = userMap.get(userId);
+        if (user != null) {
+            user.setPassword(newPassword); // In real application, ensure to hash the password
+            return true;
+        }
+        return false;
+    }
+
+
 }

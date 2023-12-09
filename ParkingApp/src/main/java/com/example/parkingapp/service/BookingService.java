@@ -3,6 +3,7 @@ package com.example.parkingapp.service;
 import com.example.parkingapp.model.Booking;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +54,19 @@ public class BookingService {
         return bookingMap.containsKey(id);
     }
 
+    public Booking bookParkingSpot(Long userId, Long parkingSpotId) {
+        // Logic to book a parking spot
+        // Create a new Booking object and add it to a booking map or list
+        return new Booking(); // Return the booking object
+    }
+
+    public boolean cancelBooking(Long bookingId) {
+        // Logic to cancel a booking
+        // Remove the booking from the booking map or list
+        return true; // Return true if successful
+    }
+
+
     // retrieve all bookings
     public List<Booking> getAllBookings() {
         return bookingMap.values().stream().toList();
@@ -71,6 +85,10 @@ public class BookingService {
     // retrieve all bookings by parking spot id and userid
     public List<Booking> getBookingsByParkingSpotIdAndUserId(Long parkingSpotId, Long userId) {
         return bookingMap.values().stream().filter(booking -> booking.getId() == parkingSpotId && booking.getUserid() == userId).toList();
+    }
+    public List<Booking> getBookingHistory(Long userId) {
+        // Logic to retrieve a list of bookings for a user
+        return new ArrayList<>(); // Return a list of bookings
     }
 
 }
